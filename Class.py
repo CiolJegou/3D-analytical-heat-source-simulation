@@ -95,12 +95,13 @@ class geometry():
         my_col = cm.jet(z/np.amax(z))
         fig = plt.figure(figsize=(6,6))
         ax = fig.add_subplot(111, projection='3d')
-        ax.set_xlabel('X axis (mm)', labelpad = 20)
-        ax.set_ylabel('Y axis (mm)', labelpad = 20)
-        ax.set_zlabel('Z axis (mm)', labelpad = 20)
+        ax.set_xlabel('x axis (mm)', labelpad = 20)
+        ax.set_ylabel('y axis (mm)', labelpad = 20)
+        ax.set_zlabel('z axis (mm)', labelpad = 20)
         # Plot a 3D surface
         ax.plot_surface(X*1e3, Y*1e3, z*1e3, facecolors = my_col)
         plt.show()
+        plt.savefig("geom.svg")
         
 #This class defines the properties of the laser
 class laser():
@@ -126,6 +127,9 @@ class laser():
         plt.plot(r*1e3, self.I(r)/1e6)
         plt.xlabel(r'Laser radius $r$ (mm)')
         plt.ylabel(r'Laser intensity I $(W.mm^{-2})$')
+        plt.savefig("laser.svg")
+        
+    
 
 #This classe defines the discretization of the space for the visualisation        
 class space():
@@ -192,9 +196,13 @@ class space():
         ax.scatter(mx, my, mz, alpha = 0.2, edgecolors = 'black')
         my_col = cm.jet(sh/np.amax(sh))
         ax.plot_surface(msx, msy, sh, facecolors = my_col)
-        ax.set_xlabel('X (mm)', labelpad = 20)
-        ax.set_ylabel('Y (mm)', labelpad = 20)
-        ax.set_zlabel('Z (mm)', labelpad = 20)
+        ax.set_xlabel('x (mm)', labelpad = 20)
+        ax.set_xticks([-2, -1, 0, 1])
+        ax.set_yticks([-1, -0.5, 0.5, 1])
+        ax.set_zticks([0.00, 0.05, 0.10, 0.015])
+        ax.set_ylabel('y (mm)', labelpad = 20)
+        ax.set_zlabel('z (mm)', labelpad = 20)
+        plt.savefig("space.svg")
         
 #This class it the analytical thermal modeling
 class temperature():
